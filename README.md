@@ -14,11 +14,11 @@ result_pos, num_steps, num_bodies = n_body_solver_3d(masses_list, initial_pos_li
 ```
 
 * `masses_list`: List of masses of the N bodies.
-* `initial_pos_list = [...]  # List of initial positions of the N bodies in three dimensions.
-* `initial_vel_list = [...]  # List of initial velocities of the N bodies in three dimensions.
-* `G = ...  # Gravitational constant.
-* `h = ...  # Time step for the RK4 integration method.
-* `t_max = ...  # Maximum simulation time.
+* `initial_pos_list`: List of initial positions of the N bodies in three dimensions.
+* `initial_vel_list`: List of initial velocities of the N bodies in three dimensions.
+* `G`: # Gravitational constant.
+* `h`: Time step for the RK4 integration method.
+* `t_max`: Maximum simulation time.
 
 ## Code Structure
 * The code begins with parameter checks to ensure the coherence of input data.
