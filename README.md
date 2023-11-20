@@ -12,7 +12,6 @@ The ODE being solved is a set of second-order differential equations representin
 '''
 python
 result_pos, num_steps, num_bodies = n_body_solver_3d(masses_list, initial_pos_list, initial_vel_list, G, h, t_max)
-'''
 
 
 masses_list: List of masses of the N bodies.
