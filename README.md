@@ -23,16 +23,16 @@ h = ...  # Time step for the RK4 integration method.
 t_max = ...  # Maximum simulation time.
 ```
 
-# Code Structure
+## Code Structure
 The code begins with parameter checks to ensure the coherence of input data.
 The n_body_acceleration function calculates the acceleration suffered by each body based on masses and current positions.
 RK4 integration method is applied to numerically solve the system of ODEs and determine the motion of the bodies over time.
 
-# Requirements
+## Requirements
 Python
 NumPy
 
-# How to Run
+## How to Run
 Ensure Python is installed.
 Install NumPy using pip install numpy.
 Run the script containing the provided n_body_solver_3d function.
