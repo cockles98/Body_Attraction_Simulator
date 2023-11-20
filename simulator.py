@@ -214,3 +214,141 @@ def animation_3d(bodies_pos_list, num_frames, num_bodies, plot_scale, zoom=0, ma
 
     ani = FuncAnimation(fig, update, frames=num_frames, init_func=init, blit=True, interval=animation_speed)
     return HTML(ani.to_html5_video())
+    
+ 
+ def animation_3d(bodies_pos_list, num_frames, num_bodies, plot_scale, zoom=0, marker_sizes=4, colors_list=None, camera_angles=[-40,1], angular_rotation_speeds=[0,0], bodies_names=None, bodies_volume=[None], body_centered_index=None, lw=0.8, font_size=8, animation_speed=50):
+    "Makes an animation video of bodies motion"
+
+    # Checks whether the parameters entered are coherent #
+    if not all(isinstance(var, int) for var in (num_frames, num_bodies)):
+        raise TypeError("num_frames and num_bodies must be integers.")
+    if not all(isinstance(var, (int, float)) for var in (lw, font_size, animation_speed)):
+        raise TypeError("plot_distance, lw, font_size, and animation_speed must be integers or floats.")
+    if not all(isinstance(var, (list, np.ndarray)) for var in (bodies_pos_list, plot_scale, camera_angles, angular_rotation_speeds, bodies_volume)):
+        raise TypeError("bodies_pos_list, plot_scale, camera_angles, angular_rotation_speeds, and bodies_volume must be lists or numpy.ndarrays.")
+    if not all(isinstance(var, (type(None), list, np.ndarray)) for var in (colors_list, bodies_names, bodies_volume)):
+        raise TypeError("colors_list, bodies_names, and bodies_volume must be lists, numpy.ndarrays, or None.")
+    if type(body_centered_index) not in [type(None), int, float]:
+        raise TypeError("body_centered_index must be None, an integer, or a float.")
+    if np.array(bodies_pos_list).shape[0] != num_frames:
+        raise ValueError("The number of frames in bodies_pos_list must be equal to num_frames.")
+    if np.array(bodies_pos_list).shape[1] != num_bodies:
+        raise ValueError("The number of bodies in bodies_pos_list must be equal to num_bodies.")
+    if np.array(bodies_pos_list).shape[2] != 3:
+        raise ValueError("The dimension of bodies_pos_list must be (num_frames, num_bodies, 3).")
+    if np.array(plot_scale).shape != (3,2):
+        raise ValueError("The shape of plot_scale must be (3, 2).")
+    if np.array(angular_rotation_speeds).shape != (2,):
+        raise ValueError("The shape of angular_rotation_speeds must be (2,).")
+
+    # Plot configurations #
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    fig.set_facecolor('gray')
+    ax.set_facecolor('gray')
+    ax.set_xlim(plot_scale[0])
+    ax.set_ylim(plot_scale[1])
+    ax.set_zlim(plot_scale[2])
+    ax.azim = camera_angles[0]
+    ax.elev = camera_angles[1]
+    #ax.get_proj = lambda: np.dot(Axes3D.get_proj(ax), np.diag([1, 1, 1, plot_distance]))
+    lines, scatters, labels = [], [], []
+    max_scale = max([max(i) for i in plot_scale])
+    if bodies_names == None: bodies_names = [f"Body {i+1}" for i in range(num_bodies)]
+    if colors_list == None: colors_list = [None for i in range(num_bodies)]
+    for i in range(num_bodies):
+        line, = ax.plot(np.array([], dtype='float128'), np.array([], dtype='float128'), np.array([], dtype='float128'), lw=lw, zorder=1, color=colors_list[i])
+        lines.append(line)
+        scatter, = ax.plot(np.array([], dtype='float128'), np.array([], dtype='float128'), np.array([], dtype='float128'), 'o')
+        scatters.append(scatter)
+        label = ax.text(0, 0, 0, '', fontsize=font_size)
+        labels.append(label)
+
+    # Sub functions #
+    def camera_position(angles, scale, center_of_view=[0,0,0]):
+        positions = np.array([
+        center_of_view[0] + scale * np.sin(np.radians(angles[1])) * np.cos(np.radians(angles[0])),
+        center_of_view[1] + scale * np.sin(np.radians(angles[1])) * np.sin(np.radians(angles[0])),
+        center_of_view[2] + scale * np.cos(np.radians(angles[1]))])
+        return positions
+
+    def size_of_view(volume, angles, scale, center_of_view=[0,0,0], body_pos=np.array([0,0,0]), fov_degrees=60.0):
+        distance = np.linalg.norm(camera_position(angles, scale, center_of_view) - body_pos)
+        fov_radians = math.radians(fov_degrees)
+        distance_order = int(math.floor(math.log10(abs(distance))))
+        apparent_size = int(2 * math.tan(0.5 * fov_radians) * (1/abs(distance_order)) * (math.pow(volume, 1/14)))
+        if distance_order == 0:   distance_order = 1
+        if apparent_size == 0:    return 1
+        return apparent_size
+
+    # Animation functions #
+    def init():
+        for line in lines:
+            line.set_data(np.array([], dtype='float128'), np.array([], dtype='float128'))
+            line.set_3d_properties(np.array([], dtype='float128'))
+        for scatter in scatters:
+            scatter.set_data(np.array([], dtype='float128'), np.array([], dtype='float128'))
+            scatter.set_3d_properties(np.array([], dtype='float128'))
+        for label in labels:
+            ax.add_artist(label)
+        return lines + scatters + labels
+
+    def update(frame):
+        # Set the center on a specific body
+        if body_centered_index != None:
+            center_x, center_y, center_z = bodies_pos_list[frame, body_centered_index]
+            ax.set_xlim(center_x + plot_scale[0][0], center_x + plot_scale[0][1])
+            ax.set_ylim(center_y + plot_scale[1][0], center_y + plot_scale[1][1])
+            ax.set_zlim(center_z + plot_scale[2][0], center_z + plot_scale[2][1])
+
+        # Update bodies
+        for i in range(num_bodies):
+            lines[i].set_data(bodies_pos_list[:frame, i, 0], bodies_pos_list[:frame, i, 1])
+            lines[i].set_3d_properties(bodies_pos_list[:frame, i, 2])
+            line_color = lines[i].get_color()
+
+            x = np.array([bodies_pos_list[frame, i, 0]], dtype='float64')
+            y = np.array([bodies_pos_list[frame, i, 1]], dtype='float64')
+            z = np.array([bodies_pos_list[frame, i, 2]], dtype='float64')
+
+            scatter = scatters[i]
+            scatter.set_data(x, y)
+            scatter.set_3d_properties(z)
+            scatter.set_color(line_color)
+
+            label = labels[i]
+            label.set_text(bodies_names[i])
+            label.set_position((x[0], y[0]))
+            label.set_rotation(90)
+            label.set_z(z[0] + 1e-1)
+
+            # Ajust marker sizes
+            if type(marker_sizes) == int:
+                scatter.set_markersize(marker_sizes)
+            if type(marker_sizes) == list:
+                scatter.set_markersize(marker_sizes[i])
+            if marker_sizes == 'auto' and not all(bodies_volume):
+                raise ValueError('To define the marker_sizes parameter as "auto", you also must pass a list with the volume of the bodies.')
+            if marker_sizes == 'auto' and all(bodies_volume):
+                scatter.set_markersize(size_of_view(bodies_volume[i], camera_angles, max_scale, [center_x, center_y, center_z], bodies_pos_list[frame, i]))
+
+        # Set rotation effect in camera
+        camera_angles[0] += angular_rotation_speeds[0]
+        camera_angles[1] += angular_rotation_speeds[1]
+        ax.azim = camera_angles[0]
+        ax.elev = camera_angles[1]
+
+        # Set the correct display order of scatters and labels (displays bodies in order, based on point of view)
+        camera_pos = camera_position(camera_angles, max_scale, [center_x, center_y, center_z])
+        view_order = [-1 * np.dot(bodies_pos_list[frame][body], camera_pos) / np.dot(camera_pos,camera_pos) for body in range(num_bodies)]
+        sort_list = np.argsort([order for order in view_order])
+        sort_dic = {index: i for i, index in enumerate(sort_list)}
+        correct_sorted_list = [sort_dic[i] for i in range(num_bodies)]
+        for i, scatter, label in zip(correct_sorted_list, scatters, labels):
+            scatter.set_zorder(i + 2)  # Use i+2 to ensure that are above the lines
+            label.set_zorder(i + 2)
+
+        return lines + scatters + labels
+
+    ani = FuncAnimation(fig, update, frames=num_frames, init_func=init, blit=True, interval=animation_speed)
+    return HTML(ani.to_html5_video())
