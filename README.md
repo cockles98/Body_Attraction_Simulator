@@ -8,8 +8,8 @@ The N-body problem refers to the gravitational interaction between multiple cele
 The ODE being solved is a set of second-order differential equations representing the gravitational interaction between N bodies. The gravitational force between two bodies is determined by Newton's law of gravitation. The acceleration of each body is influenced by the gravitational forces exerted by all other bodies in the system.
 
 ## Usage
-python
 """
+python
 Copy code
 result_pos, num_steps, num_bodies = n_body_solver_3d(masses_list, initial_pos_list, initial_vel_list, G, h, t_max)
 """
