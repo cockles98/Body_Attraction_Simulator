@@ -6,6 +6,10 @@ from mpl_toolkits.mplot3d import Axes3D
 from IPython.display import HTML
 import itertools
 
+# Just to ignore the warning in 'dist' parameter in animation functions
+# (the library is warning the parameter will be removed)
+import warnings
+from matplotlib.cbook import MatplotlibDeprecationWarning
 
 # Increase the max disc use, just for sure
 plt.rcParams['animation.embed_limit'] = 60000
