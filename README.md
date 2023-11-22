@@ -1,5 +1,5 @@
 # N-Body Solver 3D
-This Python code implements a numerical solution for the N-body problem in three-dimensional space using the Runge-Kutta of Order 4 (RK4) method. The N-body problem involves calculating the motion of multiple bodies under the influence of gravity.
+This Python code implements a numerical solution for the N-body problem in three-dimensional space using the Runge-Kutta of Order 4 (RK4) method and creates an animation to display it. The N-body problem involves calculating the motion of multiple bodies under the influence of gravity.
 
 # Problem Statement
 The N-body problem refers to the gravitational interaction between multiple celestial bodies. In this context, the code addresses the motion of N bodies in three-dimensional space. The specific Ordinary Differential Equation being solved describes the gravitational interaction between these bodies. 
