@@ -3,7 +3,7 @@ import math
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from mpl_toolkits.mplot3d import Axes3D
-from IPython.display import display, HTML
+from IPython.display import HTML
 import itertools
 
 # Just to ignore the warning in 'dist' parameter in animation functions
@@ -223,4 +223,4 @@ def animation_3d(bodies_pos_list, num_frames, num_bodies, plot_scale, title=None
         return lines + scatters + labels
 
     ani = FuncAnimation(fig, update, frames=num_frames, init_func=init, blit=True, interval=animation_speed)
-    return display(HTML(ani.to_html5_video()))
+    return HTML(ani.to_html5_video())
