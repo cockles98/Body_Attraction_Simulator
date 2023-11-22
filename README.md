@@ -28,21 +28,12 @@ animation_3d:
 * The other parameters are defined to customize the animation and they're very intuitive, however, I will leave some examples below using all the available parameters.
 
 ## Code Structure
+n_body_solver_3d:
 * The code begins with parameter checks to ensure the coherence of input data.
 * The n_body_acceleration function calculates the acceleration suffered by each body based on masses and current positions.
 * RK4 integration method is applied to numerically solve the system of ODEs and determine the motion of the bodies over time.
 
-## Examples
-`bodies_pos_list, num_frames, num_bodies = n_body_solver_3d(masses, positions, velocities, G, h, t_max)
-plot_scale = np.array([[-3e11, 3e11], [-3e11, 3e11], [-3e11, 3e11]])
-animation_3d(bodies_pos_list, num_frames, num_bodies, plot_scale,
-             camera_angles=[90,5],
-             title='Solar System (zoomed)\nView distance: 3e11 meters | Simulation time: 10 years',
-             marker_sizes='auto',
-             colors_list=['yellow', 'lightgray', 'gold', 'blue', 'red', 'wheat', 'lightyellow', 'lightseagreen', 'darkblue'],
-             bodies_names=['Sun', 'Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune'],
-             angular_rotation_speeds=[0.0,0.0],
-             animation_speed=8,
-             bodies_volume=masses,
-             body_centered_index=0)
-`
+animation_3d:
+* The code begins with parameter checks to ensure the coherence of input data.
+* The n_body_acceleration function calculates the acceleration suffered by each body based on masses and current positions.
+* RK4 integration method is applied to numerically solve the system of ODEs and determine the motion of the bodies over time.
