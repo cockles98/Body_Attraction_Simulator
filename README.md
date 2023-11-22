@@ -33,13 +33,12 @@ animation_3d:
 * RK4 integration method is applied to numerically solve the system of ODEs and determine the motion of the bodies over time.
 
 ## Examples
-`
-# Initial conditions
+`# Initial conditions
 G = 6.67430e-11             # Gravitational constant in m^3/kg/s^2
 h = 86400                   # 1 day in seconds
 t_max = 10 * 365 * 86400    # 10 years in seconds
-
-# Animation
+`
+`# Animation
 bodies_pos_list, num_frames, num_bodies = n_body_solver_3d(masses, positions, velocities, G, h, t_max)
 plot_scale = np.array([[-3e11, 3e11], [-3e11, 3e11], [-3e11, 3e11]])
 animation_3d(bodies_pos_list, num_frames, num_bodies, plot_scale,
