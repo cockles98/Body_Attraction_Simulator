@@ -24,7 +24,8 @@ animation_3d:
 * `bodies_pos_list`: List of bodies positions, returned by n_body_solver.
 * `num_frames`: Number of frames in animation (number of steps used in n_body_solver).
 * `num_bodies`: Number of bodies in the system.
-* the other parameters are defined to customize the animation and it is all very intuitive, however, I will leave some examples below using all the available parameters.
+* `plot_scale`: List with shape (3,2) of plot scales limits in X,Y and Z.
+* The other parameters are defined to customize the animation and they're very intuitive, however, I will leave some examples below using all the available parameters.
 
 ## Code Structure
 * The code begins with parameter checks to ensure the coherence of input data.
