@@ -2,7 +2,7 @@
 The N-body problem involves calculating the motion of multiple bodies under the influence of each other (gravity). This Python code implements a numerical solution for the N-body problem in three-dimensional space using the Runge-Kutta of Order 4 (RK4) method and creates an animation to display it. 
 
 # Problem Statement
-The N-body problem refers to the gravitational interaction between multiple bodies and the specific Ordinary Differential Equation (ODE) being solved describes the gravitational interaction between these bodies. More precisely, the ODE being solved is a set of second-order ODE representing the gravitational interaction between all bodies. 
+The N-body problem refers to the gravitational interaction between multiple bodies, and the specific Ordinary Differential Equation (ODE) being solved describes the gravitational interaction between these bodies. More precisely, the ODE being solved is a set of second-order ODE representing the gravitational interaction between all bodies. 
 OBS: The gravitational force between two bodies is determined by Newton's law of gravitation, and the acceleration of each body is influenced by the gravitational forces exerted by all other bodies in the system.
 
 # Usage
