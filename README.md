@@ -35,5 +35,5 @@ n_body_solver_3d:
 
 animation_3d:
 * The code begins with parameter checks to ensure the coherence of input data.
-* `camera_pos` function calculates the current coordenates of the camera, based on it's view angles and the plot scale.
-* Creates a 3D graph with all bodies using their positions at each time moment. Then synthesize all the graphics into an animation.
+* Creates a 3D graph with all bodies using their positions at each time moment.
+* Then synthesize all the graphics into an animation.
