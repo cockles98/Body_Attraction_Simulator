@@ -29,10 +29,11 @@ animation_3d:
 # Code Structure
 n_body_solver_3d:
 * The code begins with parameter checks to ensure the coherence of input data.
-* The n_body_acceleration function calculates the acceleration suffered by each body based on masses and current positions.
-* RK4 integration method is applied to numerically solve the system of ODEs and determine the motion of the bodies over time.
+* `n_body_acceleration` function calculates the acceleration suffered by each body based on masses and current positions.
+* For each time moment, uses `n_body_acceleration` within the RK4 integration method to numerically solve the system of ODEs and determine the motion suffered by each body (final position of each body).
+* Returns a list with all bodies final positions in each time moment (bodies_pos_list), the number of time moments calculated, the number of bodies in the system 
 
 animation_3d:
 * The code begins with parameter checks to ensure the coherence of input data.
-* The view_size function calculates the marker size of all bodies, based on their volume.
-* The camera_pos function calculate the current coordenates of the camera, based on it's view angles and the plot scale.
+* `camera_pos` function calculates the current coordenates of the camera, based on it's view angles and the plot scale.
+* Creates a 3D graph with all bodies using their positions at each time moment. Then synthesize all the graphics into an animation.
