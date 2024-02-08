@@ -39,4 +39,6 @@ animation_3d:
 * The other parameters are defined to customize the animation and they're very intuitive, however, I will leave some examples using all the available parameters.
 
 # Examples
-I made some usage examples calculating the motion of solar system, you can check both code and animations in the repository. Basically I took the current position/velocity of each planet and used it as initial conditions, then I created 2 animations using different scales, one to better see the inner planets and another for the outer planets. I did this process to calculate the movement of solar system considering it alone in the universe (vacuum), and another considering the movement of the galaxy.
+* I made some usage examples calculating the motion of solar system, you can check both code and animations in the repository.
+* Basically I took the current position/velocity of each planet and used it as initial conditions, then I created 2 animations using different scales, one to better see the inner planets and another for the outer planets.
+* I did this process to calculate the movement of solar system considering it alone in the universe (vacuum), and another considering the movement of the galaxy. 
