@@ -8,7 +8,7 @@ OBS: The gravitational force between two bodies is determined by Newton's law of
 # Code Structure
 n_body_solver_3d function:
 * The code begins with parameter checks to ensure the coherence of input data.
-* `n_body_acceleration` function calculates the acceleration suffered by each body based on masses and current positions.
+* `n_body_acceleration` subfunction calculates the acceleration suffered by each body based on masses and current positions.
 * For each time moment uses `n_body_acceleration` within the RK4 integration method, to numerically solve the system of ODEs and determine the motion suffered by each body (final position of each body).
 * Returns a list with all bodies positions in each time moment (bodies_pos_list), the number of time moments calculated (num_frames), the number of bodies in the system (num_bodies).
 
