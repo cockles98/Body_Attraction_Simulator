@@ -6,13 +6,13 @@ The N-body problem refers to the gravitational interaction between multiple bodi
 OBS: The gravitational force between two bodies is determined by Newton's law of gravitation, and the acceleration of each body is influenced by the gravitational forces exerted by all other bodies in the system.
 
 # Code Structure
-n_body_solver_3d:
+n_body_solver_3d function:
 * The code begins with parameter checks to ensure the coherence of input data.
 * `n_body_acceleration` function calculates the acceleration suffered by each body based on masses and current positions.
-* For each time moment, uses `n_body_acceleration` within the RK4 integration method to numerically solve the system of ODEs and determine the motion suffered by each body (final position of each body).
-* Returns a list with all bodies final positions in each time moment (bodies_pos_list), the number of time moments calculated, the number of bodies in the system 
+* For each time moment uses `n_body_acceleration` within the RK4 integration method, to numerically solve the system of ODEs and determine the motion suffered by each body (final position of each body).
+* Returns a list with all bodies positions in each time moment (bodies_pos_list), the number of time moments calculated (num_frames), the number of bodies in the system (num_bodies).
 
-animation_3d:
+animation_3d function:
 * The code begins with parameter checks to ensure the coherence of input data.
 * Creates a 3D graph with all bodies using their positions at each time moment.
 * Then synthesize all the graphics into an animation.
