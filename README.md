@@ -33,7 +33,10 @@ n_body_solver_3d:
 
 animation_3d:
 * `bodies_pos_list`: List of bodies positions, returned by n_body_solver.
-* `num_frames`: Number of frames in animation (number of steps used in n_body_solver).
+* `num_frames`: Number of frames in animation.
 * `num_bodies`: Number of bodies in the system.
-* `plot_scale`: List with (3,2) format of plot scale limits in X,Y and Z.
-* The other parameters are defined to customize the animation and they're very intuitive, however, I will leave some examples below using all the available parameters.
+* `plot_scale`: List (shape (3,2)) of plot scale limits in X,Y and Z .
+* The other parameters are defined to customize the animation and they're very intuitive, however, I will leave some examples using all the available parameters.
+
+# Examples
+I made some usage examples calculating the motion of solar system, you can check both code and animations in the repository. Basically I took the current position/velocity of each planet and used it as initial conditions, then I created 2 animations using different scales, one to better see the inner planets and another for the outer planets. I did this process to calculate the movement of solar system considering it alone in the universe (vacuum), and another considering the movement of the galaxy.
