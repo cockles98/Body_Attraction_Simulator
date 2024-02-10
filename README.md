@@ -14,7 +14,7 @@ n_body_solver_3d function:
 
 animation_3d function:
 * The code begins with parameter checks to ensure the coherence of input data.
-* Creates a 3D graph with all bodies using their positions at each time moment.
+* Creates a 3D graph with all bodies in their current positions. Do it to each time moment.
 * Then synthesize all the graphics into an animation.
 
 # Usage
@@ -40,5 +40,5 @@ animation_3d:
 
 # Examples
 * I made some usage examples calculating the motion of solar system, you can check both code and animations in the repository.
-* Basically I took the current position/velocity of each planet and used it as initial conditions, then I created 2 animations using different scales, one to better see the inner planets and another for the outer planets.
+* Basically I took the current position/velocity/mass of each planet and used it as initial conditions, then I created 2 animations using different scales, one to better see the inner planets and another for the outer planets.
 * I did this process to calculate the movement of solar system considering it alone in the universe (vacuum), and another considering the movement of the galaxy. 
